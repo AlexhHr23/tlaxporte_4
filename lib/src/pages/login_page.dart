@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tlaxporte_4/src/pages/registration_page.dart';
 import 'home_page.dart';
 
@@ -14,8 +14,8 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   //Edit controlador
-  final TextEditingController emailControlador = new TextEditingController();
-  final TextEditingController passwordControlador = new TextEditingController();
+  final TextEditingController emailController = new TextEditingController();
+  final TextEditingController passwordController = new TextEditingController();
 
   //firebase
 
@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     //Campo de correo
     final emailCampo = TextFormField(
       autofocus: false,
-      controller: emailControlador,
+      controller: emailController,
       keyboardType: TextInputType.emailAddress,
       validator: (value) {
         if (value!.isEmpty) {
@@ -39,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
         return null;
       },
       onSaved: (value) {
-        emailControlador.text = value!;
+        emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
@@ -54,7 +54,7 @@ class _LoginPageState extends State<LoginPage> {
     //Campo de contraseña
     final passwordCampo = TextFormField(
         autofocus: false,
-        controller: passwordControlador,
+        controller: passwordController,
         obscureText: true,
         validator: (value) {
           RegExp regex = new RegExp(r'^.{6,}$');
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
         onSaved: (value) {
-          passwordControlador.text = value!;
+          passwordController.text = value!;
         },
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
@@ -86,8 +86,7 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
         onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => HomePage()));
+          sigIn(emailController.text, passwordController.text);
         },
         child: Text("Login",
             textAlign: TextAlign.center,
@@ -164,5 +163,20 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
     );
+  }
+
+  void sigIn(String email, String password) async {
+    if (_formKey.currentState!.validate()) {
+      await _auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) => {
+                Fluttertoast.showToast(msg: "Inicio de sesión exitoso"),
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomePage())),
+              })
+          .catchError((e) {
+        Fluttertoast.showToast(msg: e!.message);
+      });
+    }
   }
 }

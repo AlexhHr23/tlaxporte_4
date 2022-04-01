@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "557342978326",
+    "project_id": "tlaxporte4",
+    "storage_bucket": "tlaxporte4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:557342978326:android:32cf0b3fe1232639082037",
+        "android_client_info": {
+          "package_name": "com.example.tlaxporte_4"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "557342978326-hpmn53n7t448mv2gpk8cf3f0qpe6mqhh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tlaxporte_4",
+            "certificate_hash": "ff04b23cd7bf21853907300e057d8959497882ab"
+          }
+        },
+        {
+          "client_id": "557342978326-r0phgqkd302vpkhsm00j431iis8c05mg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFI5_gvwFjghiMTfVAFk2WF8nYlgXezhg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "557342978326-r0phgqkd302vpkhsm00j431iis8c05mg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
